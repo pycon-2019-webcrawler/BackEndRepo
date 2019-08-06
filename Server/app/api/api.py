@@ -1,5 +1,5 @@
 import requests
-from lists import champion_list, champion_img_list
+from Server.Data.Champion.lists import champion_list, champion_img_list
 from flask import Flask, request, jsonify
 
 app = Flask(__name__)
@@ -40,4 +40,4 @@ def match_list():
     pass
 
 if '__main__' == __name__:
-    app.run(debug=True)
+    app.run(debug=True, port=5000, host='172.30.1.59')
