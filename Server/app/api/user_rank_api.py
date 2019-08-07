@@ -1,4 +1,4 @@
-from Server.app.Function.user_rank import user_rank_func
+from Server.app.Function.user_rank_func import user_rank_func
 from flask import request
 
 def user_rank_api():
