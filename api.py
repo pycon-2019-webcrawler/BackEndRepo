@@ -104,6 +104,8 @@ def search():
                 minion = j['stats']['totalMinionsKilled']
                 neutral_minion = j['stats']['neutralMinionsKilled']
 
+                win = j['stats']['win']
+
         score = 0
 
         for j in response_fetch_matchone['participants']:
@@ -140,6 +142,7 @@ def search():
         user['MinionsPerMinute'] = round(user['totalMinionsKilled']/(game_duration/60), 1)
         user['TotalKill'] = score
         user['killInvolvementRate'] = f'{round(((kill+assist)/score)*100)}%'
+        user['win'] = win
 
         response.append(user)
     print(time.time()-start)
