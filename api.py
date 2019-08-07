@@ -5,7 +5,7 @@ import time
 
 from lists import champion_list, champion_img_list, queue_list
 
-api_key = 'RGAPI-1d0437e0-0647-4ae2-902b-970744aca5dc'
+api_key = 'variable'
 
 def search():
     start = time.time()
