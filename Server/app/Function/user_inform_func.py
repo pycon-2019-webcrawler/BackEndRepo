@@ -40,4 +40,5 @@ def user_inform_func(user_id):
     total_dict['rank_percentage'] = rank_str.replace('(', '').replace('%', '').replace(' ', '')
 
     print(time.time()-start)
+
     return total_dict
