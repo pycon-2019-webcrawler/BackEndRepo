@@ -31,13 +31,18 @@ def user_inform_func(user_id):
 
     rank_str = ''
     count = 0
-    for i in list(bs.find('div', class_='LadderRank').find('a').text):
-        if count == 3:
-            rank_str = rank_str + i
-        if i == ' ':
-            count += 1
+    try:
+        for i in list(bs.find('div', class_='LadderRank').find('a').text):
+            if count == 3:
+                rank_str = rank_str + i
+            if i == ' ':
+                count += 1
+        total_dict['rank_percentage'] = rank_str.replace('(', '').replace('%', '').replace(' ', '')
+    except AttributeError:
+        total_dict['rank_percentage'] = ''
 
-    total_dict['rank_percentage'] = rank_str.replace('(', '').replace('%', '').replace(' ', '')
+
+
 
     print(time.time()-start)
 

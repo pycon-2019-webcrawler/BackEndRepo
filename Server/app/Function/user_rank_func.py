@@ -13,7 +13,7 @@ def user_rank_func(user_name):
     '''
     total_dict = {}
 
-    url = 'https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/' + user_name + api_key
+    url = f'https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/{user_name}?api_key={api_key}'
 
     res = requests.get(url=url)
 
@@ -25,10 +25,11 @@ def user_rank_func(user_name):
         error_dict['code'] = 404
         return error_dict, 404
 
-    url = 'https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/' + summoner_id + api_key
+    url = f'https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/{summoner_id}?api_key={api_key}'
 
     res = requests.get(url=url)
     user_data = json.loads(res.text)
+    print(user_data)
 
     queue_list = ['RANKED_SOLO_5x5', 'RANKED_FLEX_SR']
 
