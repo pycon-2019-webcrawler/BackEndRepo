@@ -4,9 +4,11 @@ app = Flask(__name__)
 
 from Server.app.api.user_rank_api import user_rank_api
 from Server.app.api.user_inform_api import user_inform_api
+from Server.app.api.user_history_api import user_history_api
 
 app.add_url_rule('/user/rank', 'user_rank_api', user_rank_api)
 app.add_url_rule('/user/inform', 'user_inform_api', user_inform_api)
+app.add_url_rule('/user/history', 'user_history_api', user_history_api)
 
 
 if __name__ == '__main__':
