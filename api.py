@@ -137,7 +137,10 @@ def search():
         user['assists'] = assist
         user['level'] = level
         user['gameDuration'] = f'{int(game_duration/60)}분{game_duration%60}초'
-        user['grade'] = round((kill+assist)/death, 3)
+        if death == 0:
+            user['grade'] = 'PERPECT'
+        else:
+            user['grade'] = round((kill+assist)/death, 3)
         user['totalMinionsKilled'] = minion+neutral_minion
         user['MinionsPerMinute'] = round(user['totalMinionsKilled']/(game_duration/60), 1)
         user['TotalKill'] = score
