@@ -343,3 +343,21 @@ queue_list = {
     1090: 'Teamfight Tactics games',
     1100: 'Ranked Teamfight Tactics games'
 }
+
+fow_spell_list = {
+    1: '정화',
+    2: 'X',
+    3: '탈진',
+    4: '점멸',
+    5: '표식',
+    6: '유체화',
+    7: '회복',
+    8: 'X',
+    9: 'X',
+    10: '부활',
+    11: '강타',
+    12: '순간이동',
+    13: '총명',
+    14: '점화',
+    15: 'X'
+}
