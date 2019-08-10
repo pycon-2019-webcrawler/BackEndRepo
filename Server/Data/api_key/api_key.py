@@ -1,1 +1,1 @@
-api_key = 'RGAPI-c21753d0-fcd2-41f0-a839-9d3345fcc3bc'
+api_key = 'variable'
