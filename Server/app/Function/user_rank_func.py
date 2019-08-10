@@ -61,7 +61,6 @@ def user_rank_func(user_name):
                 flex_dict['losses'] = flex_data['losses']
                 flex_dict['rate'] = int(flex_dict['wins'] * 100) // (int(flex_dict['wins']) + int(flex_dict['losses']))
                 flex_dict['rank_img'] = Tier_img[flex_dict['tire']][flex_dict['rank']]
-
                 total_dict['RANKED_FLEX_SR'] = flex_dict
 
         except IndexError:

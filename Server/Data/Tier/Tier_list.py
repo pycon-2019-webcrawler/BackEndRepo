@@ -1,6 +1,14 @@
 Tier_img = {
     'Unranked': 'https://opgg-static.akamaized.net/images/medals/default.png',
 
+    'IRON': {
+        'I': 'https://opgg-static.akamaized.net/images/medals/default.png',
+        'II': 'https://opgg-static.akamaized.net/images/medals/default.png',
+        'III': 'https://opgg-static.akamaized.net/images/medals/default.png',
+        'IV': 'https://opgg-static.akamaized.net/images/medals/default.png',
+
+    },
+
     'BRONZE': {
         'I': 'https://opgg-static.akamaized.net/images/medals/bronze_1.png',
         'II': 'https://opgg-static.akamaized.net/images/medals/bronze_2.png',

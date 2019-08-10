@@ -4,6 +4,7 @@ import json
 from bs4 import BeautifulSoup
 import time
 
+
 def user_inform_func(user_id):
     start = time.time()
     total_dict = {}
