@@ -1,24 +1,17 @@
 import requests
-from flask import request, jsonify
+from flask import jsonify
 from datetime import datetime, timedelta
 import time
 
-from Server.Data.Riot.Riot_list import champion_list, champion_img_list, queue_list, fow_spell_list
+from Server.Data.Riot.Riot_list import champion_list, champion_img_list, queue_list
 from Server.Data.api_key.api_key import api_key
 
 
 def user_history_func(summoner, page):
     start = time.time()
 
-    spell_list = []
-    for _ in range(15):
-        spell_list.append(0)
-
     if summoner == '':
         return jsonify({'err': 'summoner_name_required'})
-
-    if type(page) != int:
-        return jsonify({'err': 'page_must_be_integer'})
 
     if page != 0:
         page = page*10 + 1
@@ -45,9 +38,8 @@ def user_history_func(summoner, page):
         f'{enc_account_id}?beginTime={int(datetime.timestamp(datetime.now() - timedelta(days=150)))*1000}' \
         f'&endIndex={page+10}&beginIndex={page}&api_key={api_key}'
 
-    try:
-        response_fetch_matchlist = requests.get(url_fetch_matchlist).json()['matches']
-    except KeyError:
+    response_fetch_matchlist = requests.get(url_fetch_matchlist).json()['matches']
+    if not response_fetch_matchlist:
         return jsonify({'err': 'not_found'}), 404
 
     # response.append
@@ -94,6 +86,17 @@ def user_history_func(summoner, page):
                 death = j['stats']['deaths']
                 assist = j['stats']['assists']
 
+                if j['stats']['pentaKills']:
+                    multi_kill = 'pentaKill'
+                elif j['stats']['quadraKills']:
+                    multi_kill = 'quadraKill'
+                elif j['stats']['tripleKills']:
+                    multi_kill = 'tripleKill'
+                elif j['stats']['doubleKills']:
+                    multi_kill = 'doubleKill'
+                else:
+                    multi_kill = ''
+
                 level = j['stats']['champLevel']
 
                 minion = j['stats']['totalMinionsKilled']
@@ -124,18 +127,13 @@ def user_history_func(summoner, page):
         user['blueTeam'] = blue_player
         user['redTeam'] = red_player
         user['spell'] = [f'http://z.fow.kr/spell/{spell_1_id}.png', f'http://z.fow.kr/spell/{spell_2_id}.png']
-
-        if page == 0:
-            spell_list[spell_1_id] += 1
-            spell_list[spell_2_id] += 1
-
-
         user['rune'] = [f'http://opgg-static.akamaized.net/images/lol/perk/{perk_main}.png?image=w_22&v=1',
                         f'http://opgg-static.akamaized.net/images/lol/perkStyle/{perk_sub}.png?image=w_22&v=2']
         user['items'] = items
         user['kills'] = kill
         user['deaths'] = death
         user['assists'] = assist
+        user['multiKills'] = multi_kill
         user['level'] = level
         user['gameDuration'] = f'{int(game_duration/60)}분{game_duration%60}초'
         try:
@@ -143,39 +141,14 @@ def user_history_func(summoner, page):
         except ZeroDivisionError:
             user['grade'] = 'perfect'
         user['totalMinionsKilled'] = minion+neutral_minion
-        user['MinionsPerMinute'] = round(user['totalMinionsKilled']/(game_duration/60), 1)
-        user['TotalKill'] = score
+        user['minionsPerMinute'] = round(user['totalMinionsKilled']/(game_duration/60), 1)
+        user['totalKill'] = score
         try:
             user['killInvolvementRate'] = f'{round(((kill+assist)/score)*100)}%'
         except ZeroDivisionError:
             user['killInvolvementRate'] = '0%'
         user['win'] = win
         response.append(user)
-
-    if page == 0:
-        spell_dict1 = {}
-        last_index = 100
-        for j in range(2):
-            spell_dict2 = {}
-            max_value = 0
-            max_index = 0
-            for i in range(1, 15-j):
-                if spell_list[i] > max_value:
-                    max_value = spell_list[i]
-                    max_index = i
-            if max_index > last_index:
-                max_index += 1
-            last_index = max_index
-            if j == 0:
-                spell_list.pop(max_index)
-            spell_dict2['img'] = f'http://z.fow.kr/spell/{max_index}.png'
-            spell_dict2['name'] = fow_spell_list[max_index]
-
-            spell_dict1[j+1] = spell_dict2
-
-        spell_return = {}
-        spell_return['most_spell'] = spell_dict1
-        response.append(spell_return)
 
     print(time.time()-start)
     return jsonify(response)
