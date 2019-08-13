@@ -1,7 +1,7 @@
 import requests
 import json
-from Server.Data.api_key.api_key import api_key
-from Server.Data.Tier.Tier_list import Tier_img
+from ...Data.api_key.api_key import api_key
+from ...Data.Tier.Tier_list import Tier_img
 
 
 def user_rank_func(user_name):

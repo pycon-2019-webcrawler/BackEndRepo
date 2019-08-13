@@ -1,4 +1,4 @@
-from Server.app.Function.user_most_func import user_most_func
+from ..Function.user_most_func import user_most_func
 from flask import request
 
 

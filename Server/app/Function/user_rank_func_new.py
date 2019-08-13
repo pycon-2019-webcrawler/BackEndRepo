@@ -1,7 +1,7 @@
 import requests
 from flask import jsonify
 
-from Server.Data.api_key.api_key import api_key
+from ...Data.api_key.api_key import api_key
 
 
 def user_rank_func_new(summoner):

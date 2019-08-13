@@ -1,5 +1,5 @@
 from flask import request
-from Server.app.Function.user_inform_func import user_inform_func
+from ..Function.user_inform_func import user_inform_func
 
 
 def user_inform_api():

@@ -1,5 +1,5 @@
 from flask import request, jsonify
-from Server.app.Function.user_history_func import user_history_func
+from ..Function.user_history_func import user_history_func
 
 
 def user_history_api():
