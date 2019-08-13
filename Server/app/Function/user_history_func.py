@@ -3,7 +3,7 @@ from flask import jsonify
 from datetime import datetime, timedelta
 import time
 
-from Server.Data.Riot.Riot_list import champion_list, champion_img_list, queue_list
+from Server.Data.Riot.Riot_list import champion_list, champion_img_list, queue_list, summoner_spell
 from Server.Data.api_key.api_key import api_key
 
 
@@ -38,8 +38,9 @@ def user_history_func(summoner, page):
         f'{enc_account_id}?beginTime={int(datetime.timestamp(datetime.now() - timedelta(days=150)))*1000}' \
         f'&endIndex={page+10}&beginIndex={page}&api_key={api_key}'
 
-    response_fetch_matchlist = requests.get(url_fetch_matchlist).json()['matches']
-    if not response_fetch_matchlist:
+    try:
+        response_fetch_matchlist = requests.get(url_fetch_matchlist).json()['matches']
+    except KeyError:
         return jsonify({'err': 'not_found'}), 404
 
     # response.append
@@ -122,11 +123,12 @@ def user_history_func(summoner, page):
                 items = []
                 for k in item:
                     if k != 0:
-                        items.append(f'http://opgg-static.akamaized.net/images/lol/item/{k}.png?image=w_22&v=1')
+                        items.append(f'http://ddragon.leagueoflegends.com/cdn/9.15.1/img/item/{k}.png')
 
         user['blueTeam'] = blue_player
         user['redTeam'] = red_player
-        user['spell'] = [f'http://z.fow.kr/spell/{spell_1_id}.png', f'http://z.fow.kr/spell/{spell_2_id}.png']
+        user['spell'] = [f'http://ddragon.leagueoflegends.com/cdn/9.15.1/img/spell/Summoner{summoner_spell[spell_1_id]}.png',
+                         f'http://ddragon.leagueoflegends.com/cdn/9.15.1/img/spell/Summoner{summoner_spell[spell_2_id]}.png']
         user['rune'] = [f'http://opgg-static.akamaized.net/images/lol/perk/{perk_main}.png?image=w_22&v=1',
                         f'http://opgg-static.akamaized.net/images/lol/perkStyle/{perk_sub}.png?image=w_22&v=2']
         user['items'] = items

@@ -40,7 +40,7 @@ def user_rank_func(user_name):
 
 
                 solo_data = user_data[queue_list.index('RANKED_SOLO_5x5')]
-                solo_dict['tire'] = solo_data['tier']
+                solo_dict['tier'] = solo_data['tier']
                 solo_dict['rank'] = solo_data['rank']
                 solo_dict['lP'] = solo_data['leaguePoints']
                 solo_dict['wins'] = solo_data['wins']
@@ -54,7 +54,7 @@ def user_rank_func(user_name):
                 flex_dict = {}
 
                 flex_data = user_data[queue_list.index('RANKED_FLEX_SR')]
-                flex_dict['tire'] = flex_data['tier']
+                flex_dict['tier'] = flex_data['tier']
                 flex_dict['rank'] = flex_data['rank']
                 flex_dict['lP'] = flex_data['leaguePoints']
                 flex_dict['wins'] = flex_data['wins']

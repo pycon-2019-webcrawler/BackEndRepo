@@ -361,3 +361,17 @@ fow_spell_list = {
     14: '점화',
     15: 'X'
 }
+
+summoner_spell = {
+    1: 'Boost',  #정화
+    3: 'Exhaust',  #탈진
+    4: 'Flash',  #점멸
+    6: 'Haste',  #유체화
+    7: 'Heal',  #회복
+    11: 'Smite',  #강타
+    12: 'Teleport',  #순간이동
+    13: 'Mana',  #총명
+    14: 'Dot',  #점화
+    21: 'Barrier',  #방어막
+    32: 'Snowball'  #표식
+}
