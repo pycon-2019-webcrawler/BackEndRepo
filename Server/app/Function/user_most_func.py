@@ -1,7 +1,7 @@
 import requests
 from urllib.request import urlopen
-from ...Data.Riot.Riot_list import champion_list, champion_img_list
-from ...Data.api_key.api_key import api_key
+from Data.Riot.Riot_list import champion_list, champion_img_list
+from Data.api_key.api_key import api_key
 from bs4 import BeautifulSoup
 import json
 

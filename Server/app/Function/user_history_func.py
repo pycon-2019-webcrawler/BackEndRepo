@@ -3,8 +3,8 @@ from flask import jsonify
 from datetime import datetime, timedelta
 import time
 
-from ...Data.Riot.Riot_list import champion_list, champion_img_list, queue_list, summoner_spell
-from ...Data.api_key.api_key import api_key
+from Data.Riot.Riot_list import champion_list, champion_img_list, queue_list, summoner_spell
+from Data.api_key.api_key import api_key
 
 
 def user_history_func(summoner, page):

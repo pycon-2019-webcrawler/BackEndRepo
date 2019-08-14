@@ -1,4 +1,4 @@
-from ...Data.api_key.api_key import api_key
+from Data.api_key.api_key import api_key
 import requests
 import json
 from bs4 import BeautifulSoup
